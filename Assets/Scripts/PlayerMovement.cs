@@ -4,7 +4,8 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
-    private Camera cam;
+
+    private static  Camera cam;
 
     private void Start()
     {
@@ -13,16 +14,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+    }
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Vector3 target = hit.point;
-                target.y = transform.position.y;
-                agent.SetDestination(target);
-            }
-        }
+    public void MoveToInput(RaycastHit hit)
+    {
+        GameObject target = hit.transform.gameObject;
+        Vector3 position = target.transform.position;
+        position.y = transform.position.y;
+        agent.SetDestination(position);
+    }
+
+    public static bool CameraToMouseRay(Vector2 position, out RaycastHit hit)
+    {
+        Ray ray = cam.ScreenPointToRay(position);
+
+        return Physics.Raycast(ray, out hit);
     }
 }
