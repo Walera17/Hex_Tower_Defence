@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
 
-    private static  Camera cam;
+    private static Camera cam;
 
     private void Start()
     {
@@ -18,16 +18,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveToInput(RaycastHit hit)
     {
-        GameObject target = hit.transform.gameObject;
-        Vector3 position = target.transform.position;
-        position.y = transform.position.y;
-        agent.SetDestination(position);
+        if (hit.transform.TryGetComponent(out Hex hex))
+        {
+            if (hex.GetOccupied()) return;
+
+            Vector3 position = hit.transform.position;
+            position.y = transform.position.y;
+            agent.SetDestination(position);
+        }
     }
 
     public static bool CameraToMouseRay(Vector2 position, out RaycastHit hit)
-    {
-        Ray ray = cam.ScreenPointToRay(position);
+        {
+            Ray ray = cam.ScreenPointToRay(position);
 
-        return Physics.Raycast(ray, out hit);
+            return Physics.Raycast(ray, out hit);
+        }
     }
-}

@@ -11,9 +11,13 @@ public class TowerSpawn : MonoBehaviour
 
     public void SpawnTower(RaycastHit hit)
     {
-        Vector3 point = hit.transform.position;
-        point.y = hit.point.y;
+        if (hit.transform.TryGetComponent(out Hex hex))
+        {
+            hex.SetOccupied();
 
-        Instantiate(tower, point, hit.transform.localRotation);
+            Vector3 point = hit.transform.position;
+            point.y = hit.point.y;
+            Instantiate(tower, point, hit.transform.localRotation);
+        }
     }
 }

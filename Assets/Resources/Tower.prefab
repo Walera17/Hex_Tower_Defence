@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7375296679560739626}
   - component: {fileID: 4737406415092912096}
   - component: {fileID: 6400493418405288689}
+  - component: {fileID: 1616757935711100998}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -102,3 +103,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2190622540023885545, guid: acc8fcdf6cb472d409bdee4be479bc4d, type: 3}
+--- !u!208 &1616757935711100998
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6538763184036818485}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.7, y: 1, z: 1.7}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1, z: 0}
+  m_TimeToStationary: 0.5
