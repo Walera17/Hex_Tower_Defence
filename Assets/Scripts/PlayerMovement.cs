@@ -23,15 +23,21 @@ public class PlayerMovement : MonoBehaviour
             if (hex.GetOccupied()) return;
 
             Vector3 position = hit.transform.position;
-            position.y = transform.position.y;
-            agent.SetDestination(position);
+
+            SetDirection(position);
         }
     }
 
     public static bool CameraToMouseRay(Vector2 position, out RaycastHit hit)
-        {
-            Ray ray = cam.ScreenPointToRay(position);
+    {
+        Ray ray = cam.ScreenPointToRay(position);
 
-            return Physics.Raycast(ray, out hit);
-        }
+        return Physics.Raycast(ray, out hit);
     }
+
+    public void SetDirection(Vector3 position)
+    {
+        position.y = transform.position.y;
+        agent.SetDestination(position);
+    }
+}
