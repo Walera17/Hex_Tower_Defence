@@ -20,7 +20,7 @@ public class InputHandler : MonoBehaviour
 
     void EvaluateMobileInputs()
     {
-        if (!CameraToMouseRay(out RaycastHit hit)) return;
+        if (!CameraToMouseRay(out RaycastHit hit) || towerSpawn.IsCreateTower) return;
 
         if (Input.touches[0].phase == TouchPhase.Began)
             isTouching = true;
@@ -40,7 +40,7 @@ public class InputHandler : MonoBehaviour
 
     void EvaluatePersonalComputerInputs()
     {
-        if (!CameraToMouseRay(out RaycastHit hit)) return;
+        if (!CameraToMouseRay(out RaycastHit hit) || towerSpawn.IsCreateTower) return;
 
         if (Input.GetMouseButtonDown(0))
             playerMovement.MoveToInput(hit);

@@ -11,6 +11,8 @@ public class TowerSpawn : MonoBehaviour
     private Vector3 towerAdjacentPosition;
     private bool isCreateTower;
 
+    public bool IsCreateTower => isCreateTower;
+
     private void Start()
     {
         tower = Resources.Load<GameObject>("Tower");
@@ -18,7 +20,7 @@ public class TowerSpawn : MonoBehaviour
 
     private void Update()
     {
-        if (isCreateTower && (towerAdjacentPosition - playerMovement.transform.position).sqrMagnitude < 0.01f)
+        if (IsCreateTower && (towerAdjacentPosition - playerMovement.transform.position).sqrMagnitude < 0.01f)
             InstantiateTower();
     }
 
@@ -38,27 +40,31 @@ public class TowerSpawn : MonoBehaviour
             {
                 towerAdjacentPosition = newPlayerPosition;
                 towerAdjacentPosition.y = playerMovement.transform.position.y;
-                playerMovement.SetDirection(newPlayerPosition);
+                playerMovement.SetDirection(hex,newPlayerPosition);
                 isCreateTower = true;
             }
         }
     }
 
-    bool GetAdjacentPosition(Hex hex,  out Vector3 position)
+    bool GetAdjacentPosition(Hex hex, out Vector3 newPlayerPosition)
     {
         Vector3 playerPosition = playerMovement.transform.position;
         List<Vector3> adjacentClosestPositions = new List<Vector3>(hex.GetAdjacentClosestPosition());
-
+            
         if (adjacentClosestPositions.Count > 0)
         {
             if (adjacentClosestPositions.Count > 1)
                 adjacentClosestPositions.Sort((a, b) => (a - playerPosition).sqrMagnitude.CompareTo((b - playerPosition).sqrMagnitude));
 
-            position = adjacentClosestPositions[0];
+            newPlayerPosition = adjacentClosestPositions[0];
+
+            Hex hexOfPosition = hex.GetAdjacentHexOfPosition(newPlayerPosition);
+            hexOfPosition.SetOccupied();
+
             return true;
         }
 
-        position = playerPosition;
+        newPlayerPosition = playerPosition;
         return false;
     }
 
