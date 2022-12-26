@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4737406415092912096}
   - component: {fileID: 6400493418405288689}
   - component: {fileID: 3764296436485205348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hex(h_50)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,4 +117,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 4737406415092912096}
   highlightedColor: {r: 0.6603774, g: 0, b: 0.4532002, a: 1}
-  playerColor: {r: 0, g: 0, b: 0, a: 0}

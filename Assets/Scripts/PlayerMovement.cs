@@ -6,17 +6,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
 
     private static Camera cam;
+    private static int layers;
+
     private Hex prevActiveHex;
 
     public Hex PrevActiveHex => prevActiveHex;
 
     private void Start()
     {
+        layers = LayerMask.GetMask("Hex", "Tower");
         cam = Camera.main;
-    }
-
-    void Update()
-    {
     }
 
     public void MoveToInput(RaycastHit hit)
@@ -46,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Ray ray = cam.ScreenPointToRay(position);
 
-        return Physics.Raycast(ray, out hit);
+        return Physics.Raycast(ray, out hit, Mathf.Infinity, layers);
     }
 
     public void SetDirection(Vector3 position)
